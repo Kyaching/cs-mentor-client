@@ -1,14 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/logo.png";
 import { WiDaySunny } from "react-icons/wi";
 import { MdDarkMode } from "react-icons/md";
+import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const Header = () => {
   const [toggle, setToggle] = useState(false);
 
+  const { user, logOut } = useContext(AuthContext);
+  console.log(user);
+
   const handleToggle = () => {
     setToggle(!toggle);
+  };
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((e) => console.error(e));
   };
   return (
     <div className="navbar bg-base-100">
@@ -67,21 +77,30 @@ const Header = () => {
       </div>
       <div className="navbar-end">
         <div className="avatar-group w-full items-center justify-evenly -space-x-6">
-          <h3 className="">Welcome, Kyaching </h3>
-          <div className="avatar tooltip tooltip-bottom" title="Hello">
+          {user?.uid && <h3 className="">Welcome, {user?.displayName} </h3>}
+          <div
+            className="avatar tooltip tooltip-bottom"
+            title={user?.displayName}
+          >
             <div className="w-12">
-              <img src="https://placeimg.com/192/192/people" alt="" />
+              {user?.uid && <img src={user?.photoURL} alt="" />}
             </div>
           </div>
         </div>
-        <div className="flex justify-end">
-          <Link to="/login" className="btn btn-info mr-5">
-            Login
-          </Link>
-          <Link to="/register" className="btn btn-info">
-            Register
-          </Link>
-        </div>
+        {user?.uid ? (
+          <button onClick={handleLogOut} className="btn btn-info">
+            Sign Out
+          </button>
+        ) : (
+          <div className="flex justify-end">
+            <Link to="/login" className="btn btn-info mr-5">
+              Login
+            </Link>
+            <Link to="/register" className="btn btn-info">
+              Register
+            </Link>
+          </div>
+        )}
         <div
           onClick={handleToggle}
           className="ml-4 flex justify-end cursor-pointer"

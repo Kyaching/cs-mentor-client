@@ -1,17 +1,48 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const Register = () => {
+  const { createUserSignUp, updateUserProfile } = useContext(AuthContext);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.username.value;
+    const photoURL = form.photoURL.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(name, photoURL, email, password);
+
+    createUserSignUp(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        handleUpdateUserProfile(name, photoURL);
+      })
+      .catch((e) => console.error(e));
+  };
+
+  const handleUpdateUserProfile = (name, photoURL) => {
+    const profile = {
+      displayName: name,
+      photoURL: photoURL,
+    };
+    updateUserProfile(profile)
+      .then(() => {
+        console.log("profile updated");
+      })
+      .catch((e) => console.error(e));
+  };
+
   return (
     <div className="w-full mx-auto  max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100">
       <h1 className="text-2xl font-bold text-center">Register</h1>
       <form
-        novalidate=""
-        action=""
+        onSubmit={handleSubmit}
         className="space-y-6 ng-untouched ng-pristine ng-valid"
       >
         <div className="space-y-1 text-sm">
-          <label for="username" className="block dark:text-gray-400">
+          <label htmlFor="username" className="block dark:text-gray-400">
             Full Name
           </label>
           <input
@@ -20,10 +51,11 @@ const Register = () => {
             id="username"
             placeholder="Enter your full Name"
             className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+            required
           />
         </div>
         <div className="space-y-1 text-sm">
-          <label for="username" className="block dark:text-gray-400">
+          <label htmlFor="username" className="block dark:text-gray-400">
             Photo URL
           </label>
           <input
@@ -32,10 +64,11 @@ const Register = () => {
             id="photoURL"
             placeholder="Enter Photo url link"
             className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+            required
           />
         </div>
         <div className="space-y-1 text-sm">
-          <label for="username" className="block dark:text-gray-400">
+          <label htmlFor="username" className="block dark:text-gray-400">
             Email
           </label>
           <input
@@ -44,10 +77,11 @@ const Register = () => {
             id="email"
             placeholder="Enter your mail"
             className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+            required
           />
         </div>
         <div className="space-y-1 text-sm">
-          <label for="password" className="block dark:text-gray-400">
+          <label htmlFor="password" className="block dark:text-gray-400">
             Password
           </label>
           <input
@@ -56,6 +90,7 @@ const Register = () => {
             id="password"
             placeholder="Enter your Password"
             className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+            required
           />
         </div>
         <button className="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400">
