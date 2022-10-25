@@ -68,7 +68,7 @@ const Header = () => {
       <div className="navbar-end">
         <div className="avatar-group w-full items-center justify-evenly -space-x-6">
           <h3 className="">Welcome, Kyaching </h3>
-          <div className="avatar">
+          <div className="avatar tooltip tooltip-bottom" title="Hello">
             <div className="w-12">
               <img src="https://placeimg.com/192/192/people" alt="" />
             </div>
