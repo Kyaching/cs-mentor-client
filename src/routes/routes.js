@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import Checkout from "../components/Checkout/Checkout";
 import CourseDetail from "../components/Courses/CourseDetail";
 import Courses from "../components/Courses/Courses";
 import Login from "../components/Login/Login";
@@ -22,6 +23,12 @@ export const router = createBrowserRouter([
         path: "/courses",
         element: <Courses />,
         loader: () => fetch("http://localhost:5000/courses"),
+      },
+      {
+        path: "/checkout/:id",
+        element: <Checkout />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/courses/${params.id}`),
       },
     ],
   },

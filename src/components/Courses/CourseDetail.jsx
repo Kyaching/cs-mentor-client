@@ -1,11 +1,11 @@
 import React, { createRef } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import Pdf from "react-to-pdf";
 
 const ref = createRef();
 const CourseDetail = () => {
   const courseDetail = useLoaderData();
-  const { title, description, image } = courseDetail;
+  const { id, title, description, image } = courseDetail;
   return (
     <div>
       <div className="navbar bg-base-100">
@@ -106,7 +106,7 @@ const CourseDetail = () => {
         </div>
       </div>
 
-      <div className="m-4">
+      <div className="m-4 flex">
         <div
           ref={ref}
           className="md:w-1/2 mx-auto p-6 rounded-md shadow-md dark:bg-gray-900 dark:text-gray-50"
@@ -123,6 +123,12 @@ const CourseDetail = () => {
             <h2 className="text-xl font-semibold tracking-wide">{title}</h2>
           </div>
           <p className="dark:text-gray-100">{description}</p>
+
+          <div className="text-center mt-5">
+            <Link className="btn btn-success" to={`/checkout/${id}`}>
+              <span>Get Premium Access</span>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
