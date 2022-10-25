@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Course = ({ course }) => {
-  const { title, image } = course;
+  const { id, title, image } = course;
   return (
     <div className="flex flex-col dark:bg-gray-900">
       <div>
@@ -20,7 +20,7 @@ const Course = ({ course }) => {
           <span>June 1, 2020</span>
           <span>2.1K views</span>
         </div>
-        <Link to="/details" className="btn btn-info">
+        <Link to={`/details/${id}`} className="btn btn-info">
           See Details
         </Link>
       </div>

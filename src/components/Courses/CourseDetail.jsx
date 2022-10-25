@@ -1,6 +1,9 @@
 import React from "react";
+import { useLoaderData } from "react-router-dom";
 
 const CourseDetail = () => {
+  const courseDetail = useLoaderData();
+  console.log(courseDetail);
   return (
     <div className="max-w-xs p-6 rounded-md shadow-md dark:bg-gray-900 dark:text-gray-50">
       <img
