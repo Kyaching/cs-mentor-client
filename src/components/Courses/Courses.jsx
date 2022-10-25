@@ -10,7 +10,9 @@ const Courses = () => {
         <div className="flex flex-col justify-between col-span-12 py-2 space-y-8 md:space-y-16 md:col-span-3">
           <div className="flex flex-col space-y-8 md:space-y-12">
             {courses.map((course) => (
-              <Link key={course.id}>{course.title}</Link>
+              <Link to={`/details/${course.id}`} key={course.id}>
+                {course.title}
+              </Link>
             ))}
           </div>
         </div>

@@ -5,7 +5,7 @@ const CourseDetail = () => {
   const courseDetail = useLoaderData();
   console.log(courseDetail);
   return (
-    <div className="max-w-xs p-6 rounded-md shadow-md dark:bg-gray-900 dark:text-gray-50">
+    <div className="max-w-xs mx-auto p-6 rounded-md shadow-md dark:bg-gray-900 dark:text-gray-50">
       <img
         src="https://source.unsplash.com/random/300x300/?1"
         alt=""
