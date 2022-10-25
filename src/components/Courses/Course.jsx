@@ -20,7 +20,9 @@ const Course = ({ course }) => {
           <span>June 1, 2020</span>
           <span>2.1K views</span>
         </div>
-        <Link className="btn btn-info"> See Details</Link>
+        <Link to="/details" className="btn btn-info">
+          See Details
+        </Link>
       </div>
     </div>
   );
