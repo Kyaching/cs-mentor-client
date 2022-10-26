@@ -4,7 +4,7 @@
 
 ## Live Site Link
 
-[http://localhost:3000](http://localhost:3000)
+[https://cs-mentor.web.app/](https://cs-mentor.web.app/)
 
 ## Project Description
 
