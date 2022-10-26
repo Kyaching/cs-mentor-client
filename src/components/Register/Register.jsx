@@ -3,8 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const Register = () => {
-  const { setUser, createUserSignUp, updateUserProfile } =
-    useContext(AuthContext);
+  const { createUserSignUp, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();

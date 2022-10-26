@@ -17,7 +17,6 @@ This is Computer Science Course related project containing various courses
 - user name and photo will be shown after successfully register or login.
 - FAQ resolves the user's curiosity and User questions
 - It has also blog section
--
 
 ## Used Technologies
 
