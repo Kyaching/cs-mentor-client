@@ -3,7 +3,7 @@ import React from "react";
 const Blog = () => {
   return (
     <div className="m-5">
-      <div className="md:w-1/2 my-6 mx-auto p-6 overflow-hidden rounded-lg shadow dark:bg-gray-900 dark:text-gray-100">
+      <div className="md:w-1/2 my-6 mx-auto p-6 overflow-hidden rounded-lg shadow-lg dark:bg-gray-900 dark:text-gray-100">
         <article>
           <h1 className="text-2xl font-bold">Q-1. What are cors?</h1>
           <p className="mt-4 dark:text-gray-400">
@@ -19,7 +19,7 @@ const Blog = () => {
           </p>
         </article>
       </div>
-      <div className="md:w-1/2 mx-auto p-6 overflow-hidden rounded-lg shadow dark:bg-gray-900 dark:text-gray-100">
+      <div className="md:w-1/2 mx-auto p-6 overflow-hidden rounded-lg shadow-lg dark:bg-gray-900 dark:text-gray-100">
         <article>
           <h1 className="text-2xl font-bold">
             Q-2. Why are you using firebase? What other options do you have to
@@ -47,7 +47,7 @@ const Blog = () => {
           </ol>
         </article>
       </div>
-      <div className="md:w-1/2 my-6 mx-auto p-6 overflow-hidden rounded-lg shadow dark:bg-gray-900 dark:text-gray-100">
+      <div className="md:w-1/2 my-6 mx-auto p-6 overflow-hidden rounded-lg shadow-lg dark:bg-gray-900 dark:text-gray-100">
         <article>
           <h1 className="text-2xl font-bold">
             Q-3. How does the private route work?
@@ -65,7 +65,7 @@ const Blog = () => {
           </p>
         </article>
       </div>
-      <div className="md:w-1/2 my-6 mx-auto p-6 overflow-hidden rounded-lg shadow dark:bg-gray-900 dark:text-gray-100">
+      <div className="md:w-1/2 my-6 mx-auto p-6 overflow-hidden rounded-lg shadow-lg dark:bg-gray-900 dark:text-gray-100">
         <article>
           <h1 className="text-2xl font-bold">
             Q-4. What is Node? How does Node work?

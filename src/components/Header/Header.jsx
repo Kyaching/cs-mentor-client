@@ -1,20 +1,16 @@
-import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo.png";
 import { WiDaySunny } from "react-icons/wi";
 import { MdDarkMode } from "react-icons/md";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
+import { ThemeContext } from "../../contexts/ThemeProvider/ThemeProvider";
 
 const Header = () => {
-  const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
 
   const { user, logOut } = useContext(AuthContext);
-  console.log(user);
-
-  const handleToggle = () => {
-    setToggle(!toggle);
-  };
+  const { isDarkMode, handleMode } = useContext(ThemeContext);
 
   const handleLogOut = () => {
     logOut()
@@ -48,16 +44,49 @@ const Header = () => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <Link to="/courses">Courses</Link>
+              <NavLink
+                to="/courses"
+                className={({ isActive, isPending }) =>
+                  isActive ? "active" : isPending ? "pending" : ""
+                }
+              >
+                Courses
+              </NavLink>
             </li>
             <li tabIndex={0}>
-              <Link to="/faq" className="justify-between">
+              <NavLink
+                to="/faq"
+                className={({ isActive, isPending }) =>
+                  isActive ? "active" : isPending ? "pending" : ""
+                }
+              >
                 FAQ
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="blog">Blog</Link>
+              <NavLink
+                to="blog"
+                className={({ isActive, isPending }) =>
+                  isActive ? "active" : isPending ? "pending" : ""
+                }
+              >
+                Blog
+              </NavLink>
             </li>
+            {user?.uid ? (
+              <button onClick={handleLogOut} className=" my-3 btn btn-info">
+                Sign Out
+              </button>
+            ) : (
+              <div className="flex justify-end my-3">
+                <Link to="/login" className="btn btn-info mr-5">
+                  Login
+                </Link>
+                <Link to="/register" className="btn btn-info">
+                  Register
+                </Link>
+              </div>
+            )}
           </ul>
         </div>
         <Link to="/" className="btn btn-ghost normal-case text-xl">
@@ -68,19 +97,52 @@ const Header = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">
           <li>
-            <Link to="/courses">Courses</Link>
+            <NavLink
+              to="/home"
+              className={({ isActive, isPending }) =>
+                isActive ? "active" : isPending ? "pending" : ""
+              }
+            >
+              Home
+            </NavLink>
           </li>
           <li>
-            <Link to="/faq">FAQ</Link>
+            <NavLink
+              to="/courses"
+              className={({ isActive, isPending }) =>
+                isActive ? "active" : isPending ? "pending" : ""
+              }
+            >
+              Courses
+            </NavLink>
           </li>
           <li>
-            <Link to="/blog">Blog</Link>
+            <NavLink
+              to="/faq"
+              className={({ isActive, isPending }) =>
+                isActive ? "active" : isPending ? "pending" : ""
+              }
+            >
+              FAQ
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/blog"
+              className={({ isActive, isPending }) =>
+                isActive ? "active" : isPending ? "pending" : ""
+              }
+            >
+              Blog
+            </NavLink>
           </li>
         </ul>
       </div>
       <div className="navbar-end">
         <div className="avatar-group w-full items-center justify-evenly -space-x-6">
-          {user?.uid && <h3 className="">Welcome, {user?.displayName} </h3>}
+          {user?.uid && (
+            <h3 className="hidden md:block">Welcome, {user?.displayName} </h3>
+          )}
           <div
             className="avatar tooltip tooltip-bottom"
             title={user?.displayName}
@@ -91,11 +153,14 @@ const Header = () => {
           </div>
         </div>
         {user?.uid ? (
-          <button onClick={handleLogOut} className="btn btn-info">
+          <button
+            onClick={handleLogOut}
+            className="hidden md:block btn btn-info"
+          >
             Sign Out
           </button>
         ) : (
-          <div className="flex justify-end">
+          <div className=" hidden  md:flex justify-end">
             <Link to="/login" className="btn btn-info mr-5">
               Login
             </Link>
@@ -105,13 +170,13 @@ const Header = () => {
           </div>
         )}
         <div
-          onClick={handleToggle}
+          onClick={handleMode}
           className="ml-4 flex justify-end cursor-pointer"
         >
-          {toggle ? (
-            <WiDaySunny className="w-8 h-8 mr-6" />
+          {isDarkMode ? (
+            <WiDaySunny className="w-7 h-7 mr-6" />
           ) : (
-            <MdDarkMode className="w-8 h-8 mr-6" />
+            <MdDarkMode className="w-7 h-7 mr-6" />
           )}
         </div>
       </div>

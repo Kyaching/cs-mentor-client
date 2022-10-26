@@ -3,6 +3,8 @@ import Blog from "../components/Blog/Blog";
 import Checkout from "../components/Checkout/Checkout";
 import CourseDetail from "../components/Courses/CourseDetail";
 import Courses from "../components/Courses/Courses";
+import FAQ from "../components/FAQ/FAQ";
+import Home from "../components/Home/Home";
 import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
 import ErrorPage from "../ErrorPage/ErrorPage";
@@ -16,6 +18,14 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/home",
+        element: <Home />,
+      },
+      {
         path: "/login",
         element: <Login />,
       },
@@ -26,7 +36,11 @@ export const router = createBrowserRouter([
       {
         path: "/courses",
         element: <Courses />,
-        loader: () => fetch("https://cs-mentor-server.vercel.app/courses"),
+        loader: () => fetch("http://localhost:5000/courses"),
+      },
+      {
+        path: "/faq",
+        element: <FAQ />,
       },
       {
         path: "/blog",
@@ -40,14 +54,13 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://cs-mentor-server.vercel.app/courses/${params.id}`),
+          fetch(`http://localhost:5000/courses/${params.id}`),
       },
     ],
   },
   {
     path: "/details/:id",
     element: <CourseDetail />,
-    loader: ({ params }) =>
-      fetch(`https://cs-mentor-server.vercel.app/courses/${params.id}`),
+    loader: ({ params }) => fetch(`http://localhost:5000/courses/${params.id}`),
   },
 ]);
