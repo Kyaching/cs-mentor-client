@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const Checkout = () => {
+  const { user } = useContext(AuthContext);
   const course = useLoaderData();
   return (
-    <div className="flex justify-center items-center h-96">
-      <div className="text-center text-4xl md:w-1/2 font-bold">
-        <h1>
-          You get the premium access <span className="text-info">For</span>
+    <div className="flex justify-center items-center h-96 flex-col">
+      <h1>
+        <span className="text-orange-500 text-4xl">
+          Congratulations!! {user?.displayName}
+        </span>
+      </h1>
+      <div className="text-center text-3xl md:w-1/2 font-bold mt-5">
+        <h3>
+          You get the premium access
+          <span className="text-info"> For</span>
           <br />
           <span className="text-success">{course.title}</span>
-        </h1>
+        </h3>
       </div>
     </div>
   );

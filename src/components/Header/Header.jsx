@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo.png";
 import { WiDaySunny } from "react-icons/wi";
 import { MdDarkMode } from "react-icons/md";
@@ -7,6 +7,7 @@ import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const Header = () => {
   const [toggle, setToggle] = useState(false);
+  const navigate = useNavigate();
 
   const { user, logOut } = useContext(AuthContext);
   console.log(user);
@@ -17,7 +18,9 @@ const Header = () => {
 
   const handleLogOut = () => {
     logOut()
-      .then(() => {})
+      .then(() => {
+        navigate("/");
+      })
       .catch((e) => console.error(e));
   };
   return (
@@ -58,8 +61,8 @@ const Header = () => {
           </ul>
         </div>
         <Link to="/" className="btn btn-ghost normal-case text-xl">
-          <img className="w-24 h-18" src={Logo} alt="" />
-          CS MENTOR
+          <img className="hidden md:block w-24 h-18" src={Logo} alt="" />
+          <span>CS MENTOR</span>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">

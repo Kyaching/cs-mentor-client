@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const Login = () => {
@@ -20,7 +22,13 @@ const Login = () => {
         console.log(user);
         navigate(from, { replace: true });
       })
-      .catch((e) => console.error(e));
+      .catch((e) => {
+        toast.error(e.message, {
+          autoClose: 1000,
+          hideProgressBar: false,
+        });
+        console.error(e);
+      });
   };
   const handleGoogleSignIn = () => {
     googleSignIn()
@@ -121,6 +129,18 @@ const Login = () => {
           Register Here
         </Link>
       </p>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };
