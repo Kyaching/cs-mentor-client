@@ -1,12 +1,14 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const Register = () => {
-  const { createUserSignUp, updateUserProfile } = useContext(AuthContext);
+  const { createUserSignUp, updateUserProfile, setUser } =
+    useContext(AuthContext);
   const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -18,10 +20,12 @@ const Register = () => {
     createUserSignUp(email, password)
       .then((result) => {
         const user = result.user;
+        if (user) {
+          toast.success("Success");
+        }
         handleUpdateUserProfile(name, photoURL);
-        toast.success("Success");
-
-        navigate("/");
+        setUser(user);
+        form.reset();
       })
       .catch((e) =>
         toast.error(e.message, {
@@ -38,7 +42,7 @@ const Register = () => {
     };
     updateUserProfile(profile)
       .then(() => {
-        console.log("profile updated");
+        navigate("/");
       })
       .catch((e) =>
         toast.error(e.message, {
@@ -50,7 +54,7 @@ const Register = () => {
 
   return (
     <div className="m-4">
-      <div className="w-full mx-auto  max-w-md p-8 space-y-3 rounded-xl border-2 border-gray-500 dark:bg-gray-900 dark:text-gray-100">
+      <div className="w-full mx-auto  max-w-md p-8 space-y-3 rounded-xl border-gray-900 shadow-2xl dark:bg-gray-900 dark:text-gray-100">
         <h1 className="text-2xl font-bold text-center">Register</h1>
         <form
           onSubmit={handleSubmit}
@@ -65,7 +69,7 @@ const Register = () => {
               name="username"
               id="username"
               placeholder="Enter your full Name"
-              className="w-full px-4 py-3 rounded-md  dark:border-gray-700 dark:bg-gray-900 dark:text-gray-900"
+              className="w-full px-4 py-3 rounded-md text-gray-900  dark:border-gray-700 dark:bg-gray-900 dark:text-gray-900"
               required
             />
           </div>
@@ -78,7 +82,7 @@ const Register = () => {
               name="photoURL"
               id="photoURL"
               placeholder="Enter Photo url link"
-              className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+              className="w-full px-4 py-3 rounded-md text-gray-900 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
               required
             />
           </div>
@@ -91,7 +95,7 @@ const Register = () => {
               name="email"
               id="email"
               placeholder="Enter your mail"
-              className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+              className="w-full px-4 py-3 rounded-md text-gray-900 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
               required
             />
           </div>
@@ -104,7 +108,7 @@ const Register = () => {
               name="password"
               id="password"
               placeholder="Enter your Password"
-              className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+              className="w-full px-4 py-3 rounded-md text-gray-900 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
               required
             />
           </div>

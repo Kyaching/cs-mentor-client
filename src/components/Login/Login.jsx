@@ -20,7 +20,10 @@ const Login = () => {
     logIn(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        if (user) {
+          toast.success("Successfully Login");
+        }
+        form.reset();
         navigate(from, { replace: true });
       })
       .catch((e) => {
@@ -33,7 +36,6 @@ const Login = () => {
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((result) => {
-        const user = result.user;
         navigate(from, { replace: true });
       })
       .catch((e) =>
@@ -46,7 +48,6 @@ const Login = () => {
   const handleGithubSignIn = () => {
     githubSignIn()
       .then((result) => {
-        const user = result.user;
         navigate(from, { replace: true });
       })
       .catch((e) =>
@@ -70,13 +71,12 @@ const Login = () => {
       .then(() => toast.warning("Please check your email for password reset"))
       .catch((error) => {
         toast.error("Sorry Please try again");
-        console.log(error);
       });
   };
 
   return (
     <div className="m-4">
-      <div className="w-full mx-auto mt-9 max-w-md p-8 space-y-3 rounded-xl border-2 border-gray-500 dark:bg-gray-900 dark:text-gray-100">
+      <div className="w-full mx-auto mt-9 max-w-md p-8 space-y-3 rounded-xl shadow-2xl dark:bg-gray-900 dark:text-gray-400">
         <h1 className="text-2xl font-bold text-center">Login</h1>
         <form
           onSubmit={handleSubmit}
@@ -92,12 +92,12 @@ const Login = () => {
               name="email"
               id="email"
               placeholder="Enter Your Email"
-              className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+              className="w-full px-4 py-3 rounded-md text-gray-900 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
               required
             />
           </div>
           <div className="space-y-1 text-sm">
-            <label htmlFor="password" className="block dark:text-gray-400">
+            <label htmlFor="password" className="block  dark:text-gray-400">
               Password
             </label>
             <input
@@ -105,7 +105,7 @@ const Login = () => {
               name="password"
               id="password"
               placeholder="Password"
-              className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+              className="w-full px-4 py-3 rounded-md text-gray-900 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
               required
             />
             <div className="flex justify-end text-xs dark:text-gray-400">

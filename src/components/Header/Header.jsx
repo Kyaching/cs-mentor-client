@@ -5,12 +5,14 @@ import { WiDaySunny } from "react-icons/wi";
 import { MdDarkMode } from "react-icons/md";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import { ThemeContext } from "../../contexts/ThemeProvider/ThemeProvider";
+import ReactTooltip from "react-tooltip";
 
 const Header = () => {
   const navigate = useNavigate();
 
   const { user, logOut } = useContext(AuthContext);
   const { isDarkMode, handleMode } = useContext(ThemeContext);
+  console.log(user);
 
   const handleLogOut = () => {
     logOut()
@@ -144,8 +146,8 @@ const Header = () => {
             <h3 className="hidden md:block">Welcome, {user?.displayName} </h3>
           )}
           <div
-            className="avatar tooltip tooltip-bottom"
-            title={user?.displayName}
+            className="avatar tooltip  tooltip-bottom cursor-pointer"
+            data-tip={user?.displayName}
           >
             <div className="w-12">
               {user?.uid && <img src={user?.photoURL} alt="" />}
@@ -180,6 +182,7 @@ const Header = () => {
           )}
         </div>
       </div>
+      <ReactTooltip />
     </div>
   );
 };

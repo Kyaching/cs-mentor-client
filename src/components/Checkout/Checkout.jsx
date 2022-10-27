@@ -17,7 +17,7 @@ const Checkout = () => {
           You get the premium access
           <span className="text-info"> For</span>
           <br />
-          <span className="text-success">{course.title}</span>
+          <span className="text-success">{course.name}</span>
         </h3>
       </div>
     </div>

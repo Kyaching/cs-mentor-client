@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Course = ({ course }) => {
   const { id, name, image, duration, total_review } = course;
   return (
-    <div className="flex flex-col border-2 border-gray-500 dark:bg-gray-900">
+    <div className="flex flex-col shadow-2xl dark:bg-gray-900">
       <div>
         <img
           className="object-cover w-full h-52 dark:bg-gray-500"
