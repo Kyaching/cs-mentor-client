@@ -3,7 +3,6 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo.png";
 import { WiDaySunny } from "react-icons/wi";
 import { MdDarkMode } from "react-icons/md";
-import { FaUserAlt } from "react-icons/fa";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import { ThemeContext } from "../../contexts/ThemeProvider/ThemeProvider";
 
@@ -153,17 +152,23 @@ const Header = () => {
           )}
 
           <Tippy content={userName}>
-            <div className="avatar tooltip  tooltip-bottom cursor-pointer">
+            <Link
+              to="/profile"
+              className="avatar tooltip  tooltip-bottom cursor-pointer"
+            >
               {user?.uid && (
                 <div className="w-12">
                   {user?.photoURL ? (
                     <img src={user?.photoURL} alt="" />
                   ) : (
-                    <FaUserAlt />
+                    <img
+                      src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+                      alt=""
+                    />
                   )}
                 </div>
               )}
-            </div>
+            </Link>
           </Tippy>
         </div>
         {user?.uid ? (

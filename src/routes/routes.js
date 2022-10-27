@@ -7,6 +7,7 @@ import FAQ from "../components/FAQ/FAQ";
 import Home from "../components/Home/Home";
 import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
+import User from "../components/User/User";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import Main from "../layout/Main";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`https://cs-mentor-server.vercel.app/courses/${params.id}`),
+      },
+      {
+        path: "/profile",
+        element: <User />,
       },
     ],
   },
