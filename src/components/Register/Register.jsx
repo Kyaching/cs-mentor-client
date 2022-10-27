@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
@@ -23,8 +23,7 @@ const Register = () => {
         if (user) {
           toast.success("Success");
         }
-        handleUpdateUserProfile(name, photoURL);
-        setUser(user);
+        handleUpdateUserProfile(name, photoURL, user);
         form.reset();
       })
       .catch((e) =>
@@ -35,13 +34,14 @@ const Register = () => {
       );
   };
 
-  const handleUpdateUserProfile = (name, photoURL) => {
+  const handleUpdateUserProfile = (name, photoURL, user) => {
     const profile = {
       displayName: name,
       photoURL: photoURL,
     };
     updateUserProfile(profile)
       .then(() => {
+        setUser(user);
         navigate("/");
       })
       .catch((e) =>

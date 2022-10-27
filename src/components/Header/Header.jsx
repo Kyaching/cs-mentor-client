@@ -12,7 +12,6 @@ const Header = () => {
 
   const { user, logOut } = useContext(AuthContext);
   const { isDarkMode, handleMode } = useContext(ThemeContext);
-  console.log(user);
 
   const handleLogOut = () => {
     logOut()
@@ -145,14 +144,17 @@ const Header = () => {
           {user?.uid && (
             <h3 className="hidden md:block">Welcome, {user?.displayName} </h3>
           )}
-          <div
-            className="avatar tooltip  tooltip-bottom cursor-pointer"
-            data-tip={user?.displayName}
-          >
-            <div className="w-12">
-              {user?.uid && <img src={user?.photoURL} alt="" />}
+          {user?.displayName && (
+            <div
+              className="avatar tooltip  tooltip-bottom cursor-pointer"
+              data-tip={user?.displayName}
+              title={user?.displayName}
+            >
+              <div className="w-12">
+                {user?.uid && <img src={user?.photoURL} alt="" />}
+              </div>
             </div>
-          </div>
+          )}
         </div>
         {user?.uid ? (
           <button

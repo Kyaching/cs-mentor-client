@@ -6,7 +6,7 @@ import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const Login = () => {
   const [userMail, setUserMail] = useState("");
-  const { logIn, googleSignIn, githubSignIn, resetPassword } =
+  const { logIn, googleSignIn, githubSignIn, resetPassword, setUser } =
     useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -24,6 +24,7 @@ const Login = () => {
           toast.success("Successfully Login");
         }
         form.reset();
+        setUser(user);
         navigate(from, { replace: true });
       })
       .catch((e) => {
