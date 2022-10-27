@@ -3,9 +3,12 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo.png";
 import { WiDaySunny } from "react-icons/wi";
 import { MdDarkMode } from "react-icons/md";
+import { FaUserAlt } from "react-icons/fa";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import { ThemeContext } from "../../contexts/ThemeProvider/ThemeProvider";
-import ReactTooltip from "react-tooltip";
+
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -13,6 +16,10 @@ const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const { isDarkMode, handleMode } = useContext(ThemeContext);
 
+  let userName = "";
+  if (user && user?.displayName) {
+    userName = user?.displayName;
+  }
   const handleLogOut = () => {
     logOut()
       .then(() => {
@@ -144,17 +151,20 @@ const Header = () => {
           {user?.uid && (
             <h3 className="hidden md:block">Welcome, {user?.displayName} </h3>
           )}
-          {user?.displayName && (
-            <div
-              className="avatar tooltip  tooltip-bottom cursor-pointer"
-              data-tip={user?.displayName}
-              title={user?.displayName}
-            >
-              <div className="w-12">
-                {user?.uid && <img src={user?.photoURL} alt="" />}
-              </div>
+
+          <Tippy content={userName}>
+            <div className="avatar tooltip  tooltip-bottom cursor-pointer">
+              {user?.uid && (
+                <div className="w-12">
+                  {user?.photoURL ? (
+                    <img src={user?.photoURL} alt="" />
+                  ) : (
+                    <FaUserAlt />
+                  )}
+                </div>
+              )}
             </div>
-          )}
+          </Tippy>
         </div>
         {user?.uid ? (
           <button
@@ -184,7 +194,6 @@ const Header = () => {
           )}
         </div>
       </div>
-      <ReactTooltip />
     </div>
   );
 };

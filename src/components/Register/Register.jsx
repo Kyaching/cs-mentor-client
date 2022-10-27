@@ -83,7 +83,6 @@ const Register = () => {
               id="photoURL"
               placeholder="Enter Photo url link"
               className="w-full px-4 py-3 rounded-md text-gray-900 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
-              required
             />
           </div>
           <div className="space-y-1 text-sm">
